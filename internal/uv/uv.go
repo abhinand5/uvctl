@@ -22,8 +22,8 @@ func Path() (string, error) {
 
 // CreateVenv creates a virtual environment at the specified path.
 // Output is streamed to stdout/stderr.
-func CreateVenv(dir string, pythonVersion string) error {
-	args := []string{"venv", ".venv", "--python", pythonVersion}
+func CreateVenv(dir string, pythonVersion string, prompt string) error {
+	args := []string{"venv", ".venv", "--python", pythonVersion, "--prompt", prompt}
 
 	cmd := exec.Command("uv", args...)
 	cmd.Dir = dir

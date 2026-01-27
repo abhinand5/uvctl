@@ -111,7 +111,7 @@ func Create(name string, pythonVersion string) error {
 	}
 
 	// Create venv using uv - on failure, clean up
-	if err := uv.CreateVenv(envPath, pythonVersion); err != nil {
+	if err := uv.CreateVenv(envPath, pythonVersion, name); err != nil {
 		os.RemoveAll(envPath)
 		return err
 	}
