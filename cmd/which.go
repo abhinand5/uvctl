@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/abhinand/uvctl/internal/config"
-	"github.com/abhinand/uvctl/internal/env"
+	"github.com/abhinand5/uvctl/internal/config"
+	"github.com/abhinand5/uvctl/internal/env"
 	"github.com/spf13/cobra"
 )
 

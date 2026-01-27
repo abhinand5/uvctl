@@ -1,5 +1,5 @@
 BINARY := uvctl
-MODULE := github.com/abhinand/uvctl
+MODULE := github.com/abhinand5/uvctl
 
 # Version info (overridden in CI)
 VERSION ?= dev

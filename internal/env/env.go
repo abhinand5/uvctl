@@ -5,8 +5,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/abhinand/uvctl/internal/config"
-	"github.com/abhinand/uvctl/internal/uv"
+	"github.com/abhinand5/uvctl/internal/config"
+	"github.com/abhinand5/uvctl/internal/uv"
 )
 
 // List returns all environment names under the root directory.
