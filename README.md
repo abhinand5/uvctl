@@ -9,20 +9,20 @@ uvctl keeps all your environments in one place (`~/dev/envs` by default), provid
 **Quick install (Linux/macOS):**
 
 ```bash
-curl -fsSL https://github.com/abhinand/uvctl/releases/latest/download/uvctl-$(uname -s | tr '[:upper:]' '[:lower:]')-$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/') -o uvctl \
+curl -fsSL https://github.com/abhinand5/uvctl/releases/latest/download/uvctl-$(uname -s | tr '[:upper:]' '[:lower:]')-$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/') -o uvctl \
   && chmod +x uvctl && sudo mv uvctl /usr/local/bin/
 ```
 
 **With Go:**
 
 ```bash
-go install github.com/abhinand/uvctl@latest
+go install github.com/abhinand5/uvctl@latest
 ```
 
 **From source:**
 
 ```bash
-git clone https://github.com/abhinand/uvctl.git
+git clone https://github.com/abhinand5/uvctl.git
 cd uvctl && make install
 ```
 

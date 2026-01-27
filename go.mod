@@ -1,4 +1,4 @@
-module github.com/abhinand/uvctl
+module github.com/abhinand5/uvctl
 
 go 1.25.5
 
