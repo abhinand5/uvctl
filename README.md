@@ -2,7 +2,7 @@
 
 Manage Python virtual environments created with [uv](https://github.com/astral-sh/uv) from a central location.
 
-uvctl keeps all your environments in one place (`~/dev/envs` by default), provides seamless activation that works like conda, and stays out of your way. No magic, no project-local configs, just simple environment management.
+uvctl keeps all your environments in one place (`~/.local/uvctl/envs` by default), provides seamless activation that works like conda, and stays out of your way. No magic, no project-local configs, just simple environment management.
 
 ## Install
 
@@ -75,7 +75,7 @@ uvctl uses environment variables for configuration:
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `UVCTL_ROOT` | Directory where environments are stored | `~/dev/envs` |
+| `UVCTL_ROOT` | Directory where environments are stored | `~/.local/uvctl/envs` |
 | `UVCTL_ACTIVE` | Currently active environment (set automatically) | - |
 
 ## Environment Layout
@@ -83,7 +83,7 @@ uvctl uses environment variables for configuration:
 All environments live under `$UVCTL_ROOT`:
 
 ```
-~/dev/envs/
+~/.local/uvctl/envs/
 ├── myproject/
 │   └── .venv/
 │       ├── bin/

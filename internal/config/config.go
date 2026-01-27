@@ -14,7 +14,7 @@ const (
 // GetRoot returns the root directory for uvctl environments.
 // Resolution order:
 // 1. $UVCTL_ROOT if set
-// 2. ~/dev/envs (default)
+// 2. ~/.local/uvctl/envs (default)
 func GetRoot() (string, error) {
 	if root := os.Getenv(EnvRoot); root != "" {
 		return filepath.Clean(root), nil
@@ -25,7 +25,7 @@ func GetRoot() (string, error) {
 		return "", fmt.Errorf("cannot determine home directory: %w", err)
 	}
 
-	return filepath.Join(home, "dev", "envs"), nil
+	return filepath.Join(home, ".local", "uvctl", "envs"), nil
 }
 
 // GetActive returns the currently active environment name, if any.
