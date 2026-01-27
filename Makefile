@@ -1,8 +1,14 @@
 BINARY := uvctl
 MODULE := github.com/abhinand/uvctl
 
+# Version info (overridden in CI)
+VERSION ?= dev
+COMMIT  ?= $(shell git rev-parse --short HEAD 2>/dev/null || echo "none")
+
 # Build flags
-LDFLAGS := -s -w
+LDFLAGS := -s -w \
+	-X '$(MODULE)/cmd.Version=$(VERSION)' \
+	-X '$(MODULE)/cmd.Commit=$(COMMIT)'
 
 # Platforms
 PLATFORMS := linux/amd64 linux/arm64 darwin/amd64 darwin/arm64
