@@ -50,6 +50,7 @@ uvctl activate myproject
 
 # Do your work...
 python --version  # Python 3.12.x from your env
+uv pip install numpy # This command installs in the uvctl managed env
 
 # Deactivate when done
 uvctl deactivate
