@@ -8,6 +8,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var deactivateShellFlag string
+
 var deactivateCmd = &cobra.Command{
 	Use:   "deactivate",
 	Short: "Deactivate the current environment",
@@ -17,6 +19,7 @@ Note: This command requires the shell hook to be installed.
 Add this to your shell config:
 
     eval "$(uvctl hook bash)"   # or zsh
+    uvctl hook fish | source    # for fish
 
 Then 'uvctl deactivate' will work seamlessly.`,
 	Args: cobra.NoArgs,
@@ -27,13 +30,20 @@ Then 'uvctl deactivate' will work seamlessly.`,
 			os.Exit(1)
 		}
 
-		// Print shell code to deactivate
-		fmt.Println("# Deactivate current environment")
-		fmt.Println("type deactivate &>/dev/null && deactivate")
-		fmt.Println("unset UVCTL_ACTIVE")
+		if deactivateShellFlag == "fish" {
+			fmt.Println("# Deactivate current environment")
+			fmt.Println("functions -q deactivate; and deactivate")
+			fmt.Println("set -e UVCTL_ACTIVE")
+		} else {
+			// Print shell code to deactivate
+			fmt.Println("# Deactivate current environment")
+			fmt.Println("type deactivate &>/dev/null && deactivate")
+			fmt.Println("unset UVCTL_ACTIVE")
+		}
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(deactivateCmd)
+	deactivateCmd.Flags().StringVar(&deactivateShellFlag, "shell", "", "shell type for output format (fish)")
 }

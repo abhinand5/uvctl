@@ -84,6 +84,15 @@ func ActivatePath(name string) (string, error) {
 	return filepath.Join(root, name, ".venv", "bin", "activate"), nil
 }
 
+// FishActivatePath returns the path to the fish-specific activate script.
+func FishActivatePath(name string) (string, error) {
+	root, err := config.GetRoot()
+	if err != nil {
+		return "", err
+	}
+	return filepath.Join(root, name, ".venv", "bin", "activate.fish"), nil
+}
+
 // Create creates a new environment with the given name and Python version.
 // This operation is atomic - on failure, no partial state is left.
 func Create(name string, pythonVersion string) error {

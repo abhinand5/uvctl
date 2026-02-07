@@ -8,6 +8,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var activateShellFlag string
+
 var activateCmd = &cobra.Command{
 	Use:   "activate <env-name>",
 	Short: "Print shell commands to activate an environment",
@@ -25,21 +27,42 @@ Usage:
 			os.Exit(1)
 		}
 
-		activatePath, err := env.ActivatePath(name)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "error: %v\n", err)
-			os.Exit(1)
-		}
+		if activateShellFlag == "fish" {
+			activatePath, err := env.FishActivatePath(name)
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "error: %v\n", err)
+				os.Exit(1)
+			}
 
-		// Print shell code to stdout
-		// This must be eval'd by the user: eval "$(uvctl activate <env>)"
-		fmt.Println("# Deactivate any existing virtualenv")
-		fmt.Println("type deactivate &>/dev/null && deactivate")
-		fmt.Println("")
-		fmt.Println("# Activate the new environment")
-		fmt.Printf("source %q\n", activatePath)
-		fmt.Println("")
-		fmt.Println("# Set uvctl tracking variable")
-		fmt.Printf("export UVCTL_ACTIVE=%q\n", name)
+			fmt.Println("# Deactivate any existing virtualenv")
+			fmt.Println("functions -q deactivate; and deactivate")
+			fmt.Println("")
+			fmt.Println("# Activate the new environment")
+			fmt.Printf("source %q\n", activatePath)
+			fmt.Println("")
+			fmt.Println("# Set uvctl tracking variable")
+			fmt.Printf("set -gx UVCTL_ACTIVE %q\n", name)
+		} else {
+			activatePath, err := env.ActivatePath(name)
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "error: %v\n", err)
+				os.Exit(1)
+			}
+
+			// Print shell code to stdout
+			// This must be eval'd by the user: eval "$(uvctl activate <env>)"
+			fmt.Println("# Deactivate any existing virtualenv")
+			fmt.Println("type deactivate &>/dev/null && deactivate")
+			fmt.Println("")
+			fmt.Println("# Activate the new environment")
+			fmt.Printf("source %q\n", activatePath)
+			fmt.Println("")
+			fmt.Println("# Set uvctl tracking variable")
+			fmt.Printf("export UVCTL_ACTIVE=%q\n", name)
+		}
 	},
+}
+
+func init() {
+	activateCmd.Flags().StringVar(&activateShellFlag, "shell", "", "shell type for output format (fish)")
 }

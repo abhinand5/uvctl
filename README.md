@@ -28,13 +28,24 @@ cd uvctl && make install
 
 ## Setup
 
-Add the shell hook to your `~/.bashrc` or `~/.zshrc`:
+Add the shell hook to your shell configuration:
 
+**Bash** (`~/.bashrc`):
 ```bash
-eval "$(uvctl hook bash)"  # or zsh
+eval "$(uvctl hook bash)"
 ```
 
-This enables seamless `uvctl activate` and `uvctl deactivate` commands. Restart your shell or run `source ~/.bashrc` to apply.
+**Zsh** (`~/.zshrc`):
+```zsh
+eval "$(uvctl hook zsh)"
+```
+
+**Fish** (`~/.config/fish/config.fish`):
+```fish
+uvctl hook fish | source
+```
+
+This enables seamless `uvctl activate` and `uvctl deactivate` commands. Restart your shell to apply.
 
 ## Quick Start
 
